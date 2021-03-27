@@ -8,5 +8,14 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "strict": true
-  }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "../shared/*.ts",
+    "shared"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

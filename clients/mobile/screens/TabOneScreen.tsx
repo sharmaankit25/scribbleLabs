@@ -1,30 +1,25 @@
 import * as React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { userName } from "@core/shared";
-import EditScreenInfo from '../components/EditScreenInfo';
+// import { userName } from "@core/shared";
 import { Text, View } from '../components/Themed';
-
 import { incrementCounter, decrementCounter } from "@core/shared/actions/authActions"
-
 import { useSelector,useDispatch } from 'react-redux'
+import { ButtonContainer, ButtonText } from '@core/shared/styles/Button.native'
 
 export default function TabOneScreen() {
   const counter = useSelector(({ counter }) => counter.value)
   const dispatch = useDispatch()
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome { counter }</Text>
+      <Text style={styles.title}>Counter = { counter }</Text>
       <View style={{ flexDirection: 'row' }}>
-        <TouchableOpacity onPress={() => dispatch(incrementCounter())}>
-          <Text>Increase</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => dispatch(decrementCounter())}>
-          <Text>Decrease</Text>
-        </TouchableOpacity>
+      <ButtonContainer onPress={() => dispatch(decrementCounter())} >
+           <ButtonText>Decrease</ButtonText>
+       </ButtonContainer>
+        <ButtonContainer primary onPress={() => dispatch(incrementCounter())} >
+           <ButtonText>Increment</ButtonText>
+       </ButtonContainer>
       </View>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabOneScreen.tsx" />
     </View>
   );
 }
@@ -38,10 +33,5 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
+  }
 });

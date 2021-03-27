@@ -1,15 +1,18 @@
 import '../styles/globals.css'
 import React from 'react';
+import { ThemeProvider } from "styled-components";
 import App from 'next/app'
 import { createWrapper } from 'next-redux-wrapper'
 import {Provider} from 'react-redux';
 import store from '@core/shared/store';
-
+import theme from "@core/shared/styles/Theme"
 function MyApp({ Component, pageProps }) {
   return (
+    <ThemeProvider theme={theme}>
     <Provider store={store}>
       <Component {...pageProps} />
     </Provider>
+    </ThemeProvider>
   )
 
 }
