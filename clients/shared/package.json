@@ -1,0 +1,8 @@
+{
+  "name": "@core/shared",
+  "version": "1.0.0",
+  "description": "Shared files between clients",
+  "main": "index.js",
+  "author": "Ankit Sharma",
+  "license": "MIT"
+}

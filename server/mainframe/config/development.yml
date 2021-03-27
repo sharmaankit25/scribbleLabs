@@ -1,0 +1,7 @@
+db:
+  host: 'localhost'
+  type: 'mysql'
+  port: 3600
+  username: 'ankit'
+  database: 'nestjs-task-management'
+  synchronize: true

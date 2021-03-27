@@ -1,0 +1,8 @@
+{
+  "name": "@server/shared",
+  "version": "1.0.0",
+  "description": "Shared files between microservices and mainframe",
+  "main": "index.js",
+  "author": "Ankit Sharma",
+  "license": "MIT"
+}
