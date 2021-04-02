@@ -9,7 +9,7 @@ import { CatsModule } from './cats/cats.module';
 import config from './config/keys'
 
 @Module({
-  imports: [ItemsModule, GraphQLModule.forRoot({ autoSchemaFile: 'schema.gpl' }), MongooseModule.forRoot(config.mongoURI), ProductsModule, CatsModule],
+  imports: [ItemsModule, GraphQLModule.forRoot({ autoSchemaFile: 'schema.gpl', sortSchema: true }), MongooseModule.forRoot(config.mongoURI), ProductsModule, CatsModule],
   controllers: [AppController],
   providers: [AppService],
 })

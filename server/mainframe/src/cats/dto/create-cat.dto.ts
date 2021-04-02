@@ -1,13 +1,16 @@
-import { ObjectType, Field, Int, ID } from 'type-graphql';
+import { Field, Int, ObjectType, ID } from "@nestjs/graphql";
 
 @ObjectType()
-export class CatType {
+export class CatDTO {
   @Field(() => ID)
   id: string;
+
   @Field()
-  readonly name: string;
+  name: string;
+
   @Field(() => Int)
-  readonly age: number;
+  age: number;
+
   @Field()
-  readonly breed: string;
+  breed: string;
 }
