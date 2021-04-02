@@ -2,9 +2,10 @@ server:
   port: 3000
 
 db:
-  type: 'mysql'
+  type: mysql
   port: 3600
-  database: 'nestjs-task-management'
+  database: nestjs-task-management
 
 jwt:
   expiresIn: 3600
+  secret: mysecretkeyabc12345
