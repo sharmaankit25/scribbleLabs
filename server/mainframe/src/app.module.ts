@@ -11,6 +11,7 @@ import config from './config/keys';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeORMConfig } from './config/typeorm.config';
 import { UsersModule } from './users/users.module';
+import { TasksModule } from './tasks/tasks.module';
 
 @Module({
   imports: [
@@ -22,8 +23,10 @@ import { UsersModule } from './users/users.module';
     ProductsModule,
     CatsModule,
     UsersModule,
+    TasksModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
+
 export class AppModule {}

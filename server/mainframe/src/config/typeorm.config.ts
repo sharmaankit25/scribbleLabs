@@ -1,6 +1,5 @@
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
 import * as config from 'config'
-// import { User } from '../auth/user.entity';
 const dbConfig = config.get('db')
 console.log(dbConfig)
 
@@ -11,7 +10,6 @@ export const typeORMConfig: TypeOrmModuleOptions = {
     username: 'ankit',
     password: 'password@123',
     database: 'nestjs-task-management',
-    entities: [__dirname + '/../**/*.entity.{js,ts}'],
-    // entities: [User],
-    synchronize: true,
+    autoLoadEntities: true,
+    synchronize: true, // In Production set this  to false
   }

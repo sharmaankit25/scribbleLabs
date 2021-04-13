@@ -5,13 +5,13 @@ export type ItemDocument = Item & Document;
 
 @Schema()
 export class Item {
-  @Prop([String])
+  @Prop(String)
   name: string;
 
-  @Prop([Number])
+  @Prop(Number)
   qty: number;
 
-  @Prop([String])
+  @Prop(String)
   description: string;
 }
 

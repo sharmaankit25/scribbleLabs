@@ -5,16 +5,16 @@ export type ProductDocument = Product & Document;
 
 @Schema()
 export class Product extends Document {
-  @Prop([String])
+  @Prop(String)
   id: string;
 
-  @Prop([String])
+  @Prop(String)
   title: string;
 
-  @Prop([Number])
+  @Prop(Number)
   price: number;
 
-  @Prop([String])
+  @Prop(String)
   description: string;
 }
 

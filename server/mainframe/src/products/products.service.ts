@@ -12,12 +12,12 @@ export class ProductsService {
     async insertProduct(title: string, desc: string, price: number) {
         const newProduct = new this.productModel({ title, description: desc, price })
         const result  = await newProduct.save()
-        return result.id as string
+        return result.id
     }
 
     async getAll() {
         const products = await this.productModel.find().exec()
-        return products.map(prod => ({ id: prod.id, title: prod.title, description: prod.description }))
+        return products.map(prod => ({ id: prod.id, title: prod.title, description: prod.description, price: prod.price }))
     }
 
     async getOne(prodId: string) {
