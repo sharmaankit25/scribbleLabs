@@ -10,5 +10,6 @@ export const typeORMConfig: TypeOrmModuleOptions = {
     password: dbConfig.password,
     database: dbConfig.database,
     autoLoadEntities: true,
+    entities: [__dirname + '/../**/*.entity.{js,ts}'],
     synchronize: dbConfig.synchronize, // In Production set this  to false
   }
