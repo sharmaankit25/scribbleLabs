@@ -5,12 +5,12 @@ import colors from "./Colors"
 export default styled.button`
     background-color: ${ props => props.primary ?  colors.primary: colors.default };
     border: none;
-    color: white;
+    color: ${ props => props.fontColor };
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 1rem;
+    font-size: ${ props => props.size || 1 }rem;
     cursor: pointer;
 `;
 

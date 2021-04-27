@@ -1,28 +1,35 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 // import { userName } from "@core/shared";
-import { incrementCounter, decrementCounter } from "@core/shared/actions/authActions"
+import { incrementCounter, decrementCounter, INCREMENT_COUNTER } from "@core/shared/actions/authActions"
 import Wrapper from '@core/shared/styles/Wrapper'
 import MyButton from '@core/shared/styles/Button'
+import { FormInput, FormSelect, FormTextarea } from '@core/shared/styles/FormInput'
 import Button from '@material-ui/core/Button'
 import { useSelector,useDispatch } from 'react-redux'
+import { useState } from 'react'
 
-// export async function getStaticProps(context) {
+export async function getStaticProps() {
+  const res = await fetch('http://localhost:3000/api/hello').then(res => res.json())
 
-//   return {
-//     props: {}, // will be passed to the page component as props
-//   }
-// }
+  return {
+    props: {
+      world: 'world',
+      name: res.name
+    }, // will be passed to the page component as props
+  }
+}
 
-export default function Home() {
-
+export default function Home({ world, name }) {
   const counter = useSelector(state => state.counter.value)
   const dispatch = useDispatch()
+
+  const [color, setColor] = useState('#ffffff')
 
   return (
     <div className={styles.container}>
       <Head>
-        <title>Scribble Labs</title>
+        <title>{ name }</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -31,10 +38,18 @@ export default function Home() {
         <h1 className={styles.title}>
           Counter = { counter }
         </h1>
-        <MyButton onClick={() => dispatch(decrementCounter())}>Decrement</MyButton>
-        <MyButton primary onClick={() => dispatch(incrementCounter())}>Increment</MyButton>
+        <span>color : {color}</span>
+        <input type="color" value={color} onInput={(e) => setColor(e.target.value)} />
+        <br />
+        <FormInput type="text" />
+        <FormSelect>
+          <option>Select Me</option>
+        </FormSelect>
+        <FormTextarea />
+        <MyButton fontColor={color} size={counter} onClick={() => dispatch(decrementCounter())}>Decrement</MyButton>
+        <MyButton fontColor={color} size={counter} onClick={() => dispatch(incrementCounter())} primary >Increment</MyButton>
         <Button variant="contained" color="primary">
-          Hello World
+          Hello { world }
         </Button>
         </Wrapper>
       </main>
@@ -45,7 +60,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '} ScribbleLabs
+          Powered by{' '} { name }
         </a>
       </footer>
     </div>
