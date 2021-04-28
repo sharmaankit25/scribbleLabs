@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Post, Delete, Patch, Query, UsePipes, ValidationPipe, ParseIntPipe, UseGuards, Logger } from '@nestjs/common';
-import { TaskStatusValidationPipe } from 'src/items/pipes/task-status-validation.pipe';
+import { TaskStatusValidationPipe } from './pipes/task-status-validation.pipe';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { GetTaskFilterDto } from './dto/get-task-filter.dto';
 import { Task } from './task.entity';

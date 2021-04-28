@@ -1,7 +1,7 @@
 db:
   host: localhost
   type: mysql
-  port: 3600
+  port: 3306
   username: ankit
   password: password@123
   database: nestjs-task-management
