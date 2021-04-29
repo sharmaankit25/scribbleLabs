@@ -15,6 +15,7 @@
       "start:web": "yarn workspace web start",
       "dev:web": "yarn workspace web dev",
       "start:mobile": "yarn workspace mobile start",
-      "start:server": "yarn workspace mainframe start:dev"
+      "start:server": "yarn workspace mainframe start:dev",
+      "storybook:web": "yarn workspace web storybook"
    }
 }
