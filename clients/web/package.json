@@ -17,6 +17,7 @@
     "@storybook/addon-essentials": "^6.2.9",
     "@storybook/addon-links": "^6.2.9",
     "@storybook/react": "^6.2.9",
+    "formik": "^2.2.6",
     "next": "10.0.9",
     "next-redux-wrapper": "^6.0.2",
     "react": "17.0.1",
