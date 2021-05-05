@@ -16,6 +16,10 @@
       "dev:web": "yarn workspace web dev",
       "start:mobile": "yarn workspace mobile start",
       "start:server": "yarn workspace mainframe start:dev",
-      "storybook:web": "yarn workspace web storybook"
+      "storybook:web": "yarn workspace web storybook",
+      "dev": "concurrently \"yarn dev:web\" \"yarn start:server\""
+   },
+   "dependencies": {
+      "concurrently": "^6.0.2"
    }
 }

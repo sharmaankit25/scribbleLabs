@@ -1,5 +1,6 @@
 import { SyntheticEvent, useState } from "react"
 import { useRouter } from 'next/router'
+import Layout from '../components/layouts/Layout'
 
 const Register = () => {
     const router = useRouter()
@@ -19,14 +20,14 @@ const Register = () => {
     }
 
     return (
-        <div>
+        <Layout>
         <h2>Register</h2>
         <form onSubmit={onSubmitHandler}>
             <input type="text" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
             <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
             <button type="submit">Register</button>
         </form>
-        </div>
+        </Layout>
     )
 }
 

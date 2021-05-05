@@ -7,7 +7,6 @@ import { FormInput, FormSelect, FormTextarea } from '@core/shared/styles/FormInp
 import Button from '@material-ui/core/Button'
 import { useSelector,useDispatch } from 'react-redux'
 import { useState } from 'react'
-import Menu from '../components/Menu'
 import Layout from '../components/layouts/Layout'
 import { InferGetStaticPropsType } from 'next'
 
