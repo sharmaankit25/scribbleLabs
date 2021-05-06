@@ -12,6 +12,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeORMConfig } from './config/typeorm.config';
 import { UsersModule } from './users/users.module';
 import { TasksModule } from './tasks/tasks.module';
+import { SettingsController } from './settings/settings.controller';
 
 @Module({
   imports: [
@@ -25,7 +26,7 @@ import { TasksModule } from './tasks/tasks.module';
     UsersModule,
     TasksModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, SettingsController],
   providers: [AppService],
 })
 

@@ -10,19 +10,7 @@ import { useState } from 'react'
 import Layout from '../components/layouts/Layout'
 import { InferGetStaticPropsType } from 'next'
 
-export const getServerSideProps = async () => {
-  const res = await fetch('http://localhost:3000/api/hello')
-  const { name }: HelloInterface = await res.json()
-
-  return {
-    props: {
-      world: 'world',
-      name
-    }, // will be passed to the page component as props
-  }
-}
-
-// export const getStaticProps = async () => {
+// export const getServerSideProps = async () => {
 //   const res = await fetch('http://localhost:3000/api/hello')
 //   const { name }: HelloInterface = await res.json()
 
@@ -34,16 +22,36 @@ export const getServerSideProps = async () => {
 //   }
 // }
 
+export const getStaticProps = async () => {
+  const res = await fetch('http://localhost:3000/api/hello')
+  const { name }: HelloInterface = await res.json()
+
+  const res2 = await fetch('http://localhost:5000/settings')
+  const { primaryColor }: ThemeInterface = await res2.json()
+
+  return {
+    props: {
+      world: 'world',
+      name,
+      primaryColor
+    }, // will be passed to the page component as props
+  }
+}
+
 interface HelloInterface {
   name: string
 }
 
+interface ThemeInterface {
+  primaryColor: string
+}
+
 export default function Home(props: InferGetStaticPropsType<typeof getStaticProps>) {
-  const { world, name } = props
+  const { world, name, primaryColor } = props
   const counter = useSelector(state => state.counter.value)
   const dispatch = useDispatch()
 
-  const [color, setColor] = useState('#ffffff')
+  const [color, setColor] = useState(primaryColor || '#ffffff')
 
   return (
     <Layout>

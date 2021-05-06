@@ -10,15 +10,20 @@ const Login = () => {
 
 	const formik = useFormik({
 		initialValues: {
-			email: '',
+			username: '',
 			password: '',
 		},
-		onSubmit: async () => {
-			await fetch('http://localhost:5000/login', {
+		onSubmit: async (values) => {
+			/**
+			 *
+				"username": "admin",
+				"password": "Admin@3982_!"
+			 */
+			await fetch('http://localhost:5000/auth/signin', {
 				method: 'POST',
 				headers: { 'content-type': 'application/json' },
-				credentials: 'include',
-				body: JSON.stringify({ username, password }),
+				// credentials: 'include',
+				body: JSON.stringify(values),
 			})
 
 			router.push('/')
@@ -38,13 +43,13 @@ const Login = () => {
 			<form onSubmit={formik.handleSubmit}>
 				<TextField
 					fullWidth
-					id="email"
-					name="email"
-					label="Email"
-					value={formik.values.email}
+					id="username"
+					name="username"
+					label="Username"
+					value={formik.values.username}
 					onChange={formik.handleChange}
-					error={formik.touched.email && Boolean(formik.errors.email)}
-					helperText={formik.touched.email && formik.errors.email}
+					error={formik.touched.username && Boolean(formik.errors.username)}
+					helperText={formik.touched.username && formik.errors.username}
 				/>
 				<TextField
 					fullWidth
