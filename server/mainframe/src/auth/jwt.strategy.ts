@@ -6,6 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { UserRepository } from './user.repository'
 import { User } from './user.entity'
 import * as config from 'config'
+import { Request } from 'express';
 
 const jwtConfig = config.get('jwt')
 
@@ -14,7 +15,11 @@ const jwtConfig = config.get('jwt')
 export class JwtStrategy extends PassportStrategy(Strategy) {
     constructor(@InjectRepository(UserRepository) private userRepository: UserRepository) {
         super({
-            jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+            jwtFromRequest: ExtractJwt.fromExtractors([ExtractJwt.fromAuthHeaderAsBearerToken(),
+                (request: Request) => {
+                    return request?.cookies?.Authentication;
+                }
+            ]),
             ignoreExpiration: false,
             secretOrKey: process.env.JWT_SECRET || jwtConfig.secret,
         })

@@ -1,13 +1,15 @@
-import { Injectable, UnauthorizedException, Logger } from '@nestjs/common';
+import { Injectable, UnauthorizedException, Logger, Res } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt'
 import { UserRepository } from './user.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { JwtPayload } from './jwt-payload.interface';
+import * as config from 'config'
 
 @Injectable()
 export class AuthService {
     private logger = new Logger('AuthService')
+
     constructor(
         @InjectRepository(UserRepository)
         private userRepository: UserRepository,
@@ -29,7 +31,15 @@ export class AuthService {
         const accessToken = await this.jwtService.sign(payload)
         this.logger.debug(`Generated JWT Token with payload ${JSON.stringify(payload)}`)
 
-        // Set Cookie
         return { accessToken }
+    }
+
+    public getCookieWithJwtToken(token: string) {
+        const jwtConfig = config.get('jwt')
+        return `Authentication=${token}; HttpOnly; Path=/; Max-Age=${jwtConfig.expiresIn || 10000}`;
+    }
+
+    public getCookieForLogOut() {
+        return `Authentication=; HttpOnly; Path=/; Max-Age=0`;
     }
 }

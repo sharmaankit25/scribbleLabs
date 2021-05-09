@@ -22,7 +22,7 @@ const Login = () => {
 			await fetch('http://localhost:5000/auth/signin', {
 				method: 'POST',
 				headers: { 'content-type': 'application/json' },
-				// credentials: 'include',
+				credentials: 'include',
 				body: JSON.stringify(values),
 			})
 
