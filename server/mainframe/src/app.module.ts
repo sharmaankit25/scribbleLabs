@@ -13,6 +13,7 @@ import { typeORMConfig } from './config/typeorm.config';
 import { UsersModule } from './users/users.module';
 import { TasksModule } from './tasks/tasks.module';
 import { SettingsController } from './settings/settings.controller';
+import { CaslModule } from './casl/casl.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { SettingsController } from './settings/settings.controller';
     CatsModule,
     UsersModule,
     TasksModule,
+    CaslModule,
   ],
   controllers: [AppController, SettingsController],
   providers: [AppService],

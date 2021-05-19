@@ -8,20 +8,26 @@ import { TasksService } from './tasks.service';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from 'src/auth/user.entity';
 import { GetUser } from 'src/auth/get-user.decorator';
+import { PoliciesGuard } from 'src/policies/policies.guard';
+import { AppAbility } from 'src/casl/casl-ability.factory';
+import { Action } from 'src/casl/actions.enum';
+import { CheckPolicies } from 'src/policies/check-policies.decorator';
 
 @Controller('tasks')
-@UseGuards(AuthGuard())
+@UseGuards(AuthGuard(),PoliciesGuard)
 export class TasksController {
     private logger = new Logger('TaskController')
     constructor(private taskService: TasksService) {}
 
     @Get()
+    @CheckPolicies((ability: AppAbility) => ability.can(Action.Read, Task))
     getTasks(@Query(ValidationPipe) filterDto: GetTaskFilterDto, @GetUser() user: User): Promise<Task[]> {
         this.logger.verbose(`User "${user.username}" retrieving all tasks. Filters ${JSON.stringify(filterDto)}`)
         return this.taskService.getTasks(filterDto, user)
     }
 
     @Post()
+    @CheckPolicies((ability: AppAbility) => ability.can(Action.Create, Task))
     @UsePipes(ValidationPipe)
     createTask(@Body() createTaskDto: CreateTaskDto, @GetUser() user: User): Promise<Task> {
         this.logger.verbose(`User "${user.username}" creating task. Data: ${JSON.stringify(createTaskDto)}`)
@@ -34,6 +40,7 @@ export class TasksController {
     }
 
     @Delete('/:id')
+    @CheckPolicies((ability: AppAbility) => ability.can(Action.Delete, Task))
     deleteTask(@Param('id', ParseIntPipe) id: number, @GetUser() user: User): Promise<Task> {
         return this.taskService.deleteTaskById(id, user)
     }
