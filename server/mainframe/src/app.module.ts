@@ -10,23 +10,27 @@ import { AuthModule } from './auth/auth.module';
 import config from './config/keys';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeORMConfig } from './config/typeorm.config';
-import { UsersModule } from './users/users.module';
 import { TasksModule } from './tasks/tasks.module';
 import { SettingsController } from './settings/settings.controller';
 import { CaslModule } from './casl/casl.module';
+import { RolesAndPermissionsModule } from './roles-and-permissions/roles-and-permissions.module';
 
 @Module({
   imports: [
-    ItemsModule,
     TypeOrmModule.forRoot(typeORMConfig),
+    MongooseModule.forRoot(config.mongoURI, {
+      useUnifiedTopology: true,
+      useNewUrlParser: true,
+      useCreateIndex: true
+    }),
     GraphQLModule.forRoot({ autoSchemaFile: 'schema.gpl', sortSchema: true }),
-    MongooseModule.forRoot(config.mongoURI),
+    ItemsModule,
     AuthModule,
     ProductsModule,
     CatsModule,
-    UsersModule,
     TasksModule,
     CaslModule,
+    RolesAndPermissionsModule,
   ],
   controllers: [AppController, SettingsController],
   providers: [AppService],

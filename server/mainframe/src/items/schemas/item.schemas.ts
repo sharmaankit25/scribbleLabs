@@ -3,9 +3,13 @@ import { Document } from 'mongoose';
 
 export type ItemDocument = Item & Document;
 
-@Schema()
-export class Item {
-  @Prop(String)
+// interface NameTypeInterface { required: Boolean, message: String }
+@Schema({
+  timestamps: true
+})
+export class Item extends Document{
+
+  @Prop({ type: String })
   name: string;
 
   @Prop(Number)
@@ -13,6 +17,12 @@ export class Item {
 
   @Prop(String)
   description: string;
+
+  // @Prop({ default: Date.now })
+  // createdAt:Date
+
+  // @Prop({ default: Date.now })
+  // updatedAt:Date
 }
 
 export const ItemSchema = SchemaFactory.createForClass(Item);

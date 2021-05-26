@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ItemDocument } from "./schemas/item.schemas";
-import { Item as ItemType} from './interfaces/item.interface'
+import { Item as ItemType} from './schemas/item.schemas'
 import { CreateItemDto } from './dto/create-item.dto';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
