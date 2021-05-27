@@ -1,9 +1,13 @@
-import { Controller, Post, Body, ValidationPipe, Res } from '@nestjs/common';
+import { Controller, Post, Body, ValidationPipe, Res, UseGuards, Get } from '@nestjs/common';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { AuthService } from './auth.service';
 import { Response } from 'express';
+import { AuthGuard } from '@nestjs/passport';
+import { GetUser } from './get-user.decorator';
+import { User } from './user.entity';
 
 @Controller('auth')
+
 export class AuthController {
     constructor(private authService: AuthService) {}
 
@@ -25,4 +29,14 @@ export class AuthController {
         response.setHeader('Set-Cookie', this.authService.getCookieForLogOut());
         return response.sendStatus(200);
     }
+
+    @UseGuards(AuthGuard())
+    @Get('/user')
+    getAuthUser (@GetUser() user: User) {
+        const authUser = { ...user }
+        delete authUser.password
+        delete authUser.salt
+        return authUser
+    }
+
 }

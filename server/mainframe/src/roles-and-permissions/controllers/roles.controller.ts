@@ -27,7 +27,6 @@ import {
 
     @Post()
     create(@Body() createRoleDto: CreateRoleDto): Promise<Role> {
-        console.log(createRoleDto)
       return this.rolesService.create(createRoleDto);
     }
 

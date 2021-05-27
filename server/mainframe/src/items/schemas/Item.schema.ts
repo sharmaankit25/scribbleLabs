@@ -2,27 +2,20 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
 export type ItemDocument = Item & Document;
-
-// interface NameTypeInterface { required: Boolean, message: String }
 @Schema({
   timestamps: true
 })
-export class Item extends Document{
+export class Item extends Document {
 
-  @Prop({ type: String })
+  @Prop({ type: String, required: true })
   name: string;
 
-  @Prop(Number)
+  @Prop({ type: Number, required: true })
   qty: number;
 
-  @Prop(String)
+  @Prop()
   description: string;
 
-  // @Prop({ default: Date.now })
-  // createdAt:Date
-
-  // @Prop({ default: Date.now })
-  // updatedAt:Date
 }
 
 export const ItemSchema = SchemaFactory.createForClass(Item);
