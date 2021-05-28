@@ -6,7 +6,7 @@ export enum PermissionsEnum {
     TASK_MANAGE = 'TASK_MANAGE'
 }
 
-export const Permissions = {
+export const PERMISSIONS = {
     Task: {
         create: PermissionsEnum.TASK_CREATE,
         read: PermissionsEnum.TASK_READ,

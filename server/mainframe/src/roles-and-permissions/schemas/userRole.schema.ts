@@ -1,18 +1,18 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Schema as MongooseSchema } from 'mongoose';
-import { Role } from './role.schema';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
+import { Document, Schema as MongooseSchema } from 'mongoose'
+import { Role } from './role.schema'
 
-export type UserRoleDocument = UserRole & Document;
+export type UserRoleDocument = UserRole & Document
 
 @Schema({
-  timestamps: true
+  timestamps: true,
 })
 export class UserRole extends Document {
   @Prop(Number)
-  userId: number;
+  userId: number
 
   @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: Role.name }] })
-  roles: string[];
+  roles: string[]
 }
 
-export const UserRoleSchema = SchemaFactory.createForClass(UserRole);
+export const UserRoleSchema = SchemaFactory.createForClass(UserRole)

@@ -12,7 +12,7 @@
    "workspaces": [
       "clients/*",
       "server/*",
-      "common"
+      "common/*"
    ],
    "nohoist": [
       "react-native",

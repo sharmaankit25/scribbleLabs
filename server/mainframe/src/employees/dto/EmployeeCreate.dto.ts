@@ -5,22 +5,20 @@ import {
   NotEquals,
   notEquals,
   ValidateIf,
-} from 'class-validator';
-import { EmployeeStatus, EmployeeTier } from '../Employee.enum';
+} from 'class-validator'
+import { EmployeeStatus, EmployeeTier } from '../Employee.enum'
 
 export class EmployeeCreateDto {
-  id: string;
+  id: string
   @IsNotEmpty()
-  firstName: string;
-  @IsNotEmpty()
-  lastName: string;
+  name: string
   @NotEquals('CEO')
-  designation: string;
-  nearestCity: string;
+  designation: string
+  nearestCity: string
   //@IsIn(Object.values(EmployeeTier)) <- this way also possible. but we developed
   //custom pipe to demostrate usage of that
-  tier: EmployeeTier;
-  @ValidateIf((s) => typeof s.status !== 'undefined') //<- conditional validation if status given it should be type of EmployeeStatus. but if not given its ignored
+  tier: EmployeeTier
+  @ValidateIf(s => typeof s.status !== 'undefined') //<- conditional validation if status given it should be type of EmployeeStatus. but if not given its ignored
   @IsIn(Object.values(EmployeeStatus))
-  status: EmployeeStatus;
+  status: EmployeeStatus
 }

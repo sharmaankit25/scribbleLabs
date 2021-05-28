@@ -1,16 +1,16 @@
-import { Field, Int, ObjectType, ID } from "@nestjs/graphql";
+import { Field, Int, ObjectType, ID } from '@nestjs/graphql'
 
 @ObjectType()
 export class CatDTO {
   @Field(() => ID)
-  id: string;
+  id: string
 
   @Field()
-  name: string;
+  name: string
 
   @Field(() => Int)
-  age: number;
+  age: number
 
   @Field()
-  breed: string;
+  breed: string
 }

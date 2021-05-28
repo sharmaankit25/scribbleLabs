@@ -1,23 +1,23 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { EmployeeStatus, EmployeeTier } from '../Employee.enum';
-import { v1 as uuid } from 'uuid';
-import { EmployeeSearchDto } from '../dto/EmployeeSearch.dto';
-import { EmployeeUpdateDto } from '../dto/EmployeeUpdate.dto';
-import { EmployeeCreateDto } from '../dto/EmployeeCreate.dto';
-import { Messages } from '../Messages.data';
-import { Employee } from '../schemas/Employee.schema';
-import { EmployeeRepository } from '../repository/employee.repository';
+import { Injectable, NotFoundException } from '@nestjs/common'
+import { EmployeeStatus, EmployeeTier } from '../Employee.enum'
+import { v1 as uuid } from 'uuid'
+import { EmployeeSearchDto } from '../dto/EmployeeSearch.dto'
+import { EmployeeUpdateDto } from '../dto/EmployeeUpdate.dto'
+import { EmployeeCreateDto } from '../dto/EmployeeCreate.dto'
+import { Messages } from '../Messages.data'
+import { Employee } from '../schemas/Employee.schema'
+import { EmployeeRepository } from '../repository/employee.repository'
 
 @Injectable()
 export class EmployeesService {
   constructor(private employeeRepository: EmployeeRepository) {}
 
   async getAll(): Promise<Employee[]> {
-    return await this.employeeRepository.findAll();
+    return await this.employeeRepository.findAll()
   }
 
   async create(employeeCreateDto: EmployeeCreateDto): Promise<Employee> {
-    return await this.employeeRepository.create(employeeCreateDto);
+    return await this.employeeRepository.create(employeeCreateDto)
   }
 
   /* employeeSearch(employeeSearchDto: EmployeeSearchDto) {
@@ -51,8 +51,8 @@ export class EmployeesService {
       } */
 
   async delete(id: string): Promise<boolean> {
-    const x = await this.employeeRepository.delete(id);
-    console.log(x);
-    return x;
+    const x = await this.employeeRepository.delete(id)
+    console.log(x)
+    return x
   }
 }

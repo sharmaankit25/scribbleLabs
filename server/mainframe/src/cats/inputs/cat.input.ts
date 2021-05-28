@@ -1,11 +1,10 @@
-
-import { InputType, Field, Int } from "@nestjs/graphql";
+import { InputType, Field, Int } from '@nestjs/graphql'
 @InputType({ isAbstract: true })
 export class CatInput {
   @Field()
-  name: string;
+  name: string
   @Field(() => Int)
-  age: number;
+  age: number
   @Field()
-  breed: string;
+  breed: string
 }

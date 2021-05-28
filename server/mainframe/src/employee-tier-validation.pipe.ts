@@ -1,6 +1,11 @@
-import { ArgumentMetadata, BadRequestException, Injectable, PipeTransform } from '@nestjs/common';
-import { validate } from 'class-validator';
-import { EmployeeTier } from './employees/Employee.enum';
+import {
+  ArgumentMetadata,
+  BadRequestException,
+  Injectable,
+  PipeTransform,
+} from '@nestjs/common'
+import { validate } from 'class-validator'
+import { EmployeeTier } from './employees/Employee.enum'
 
 @Injectable()
 export class EmployeeTierValidationPipe implements PipeTransform {
@@ -8,6 +13,6 @@ export class EmployeeTierValidationPipe implements PipeTransform {
     if (!(value.tier in EmployeeTier)) {
       throw new BadRequestException(`${value.tier} is not a valid tier`)
     }
-    return value;
+    return value
   }
 }
