@@ -8,7 +8,7 @@ export type UserRoleDocument = UserRole & Document;
   timestamps: true
 })
 export class UserRole extends Document {
-  @Prop({ type: Number })
+  @Prop(Number)
   userId: number;
 
   @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: Role.name }] })

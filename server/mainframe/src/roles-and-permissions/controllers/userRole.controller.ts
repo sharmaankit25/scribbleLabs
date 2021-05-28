@@ -25,6 +25,11 @@ import {
       return this.userRolesService.findOne(id);
     }
 
+    @Get('/user/:id')
+    findUserRoles(@Param('id') id): Promise<UserRole[]> {
+      return this.userRolesService.findUserRole(id);
+    }
+
     @Post()
     create(@Body() createRoleDto: CreateUserRoleDto): Promise<UserRole> {
       return this.userRolesService.create(createRoleDto);

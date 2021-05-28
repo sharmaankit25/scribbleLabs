@@ -10,10 +10,10 @@ export class Item extends Document {
   @Prop({ type: String, required: true })
   name: string;
 
-  @Prop({ type: Number, required: true })
+  @Prop({ type: Number, required: true, default: 1 })
   qty: number;
 
-  @Prop()
+  @Prop({ type: String })
   description: string;
 
 }

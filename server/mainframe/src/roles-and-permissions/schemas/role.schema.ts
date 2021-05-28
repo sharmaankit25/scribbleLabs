@@ -7,13 +7,13 @@ export type RoleDocument = Role & Document;
   timestamps: true
 })
 export class Role extends Document {
-  @Prop()
+  @Prop(String)
   title: string;
 
-  @Prop()
+  @Prop(String)
   slug: string;
 
-  @Prop()
+  @Prop(String)
   description: string;
 }
 

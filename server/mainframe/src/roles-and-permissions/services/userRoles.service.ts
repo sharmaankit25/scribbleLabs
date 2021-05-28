@@ -11,11 +11,16 @@ export class UserRolesService {
 
 
   async findAll(): Promise<UserRoleType[]> {
-    return await this.userRoleModel.find();
+    return await this.userRoleModel.find().populate('roles');
   }
 
   async findOne(id: string): Promise<UserRoleType> {
-    return await this.userRoleModel.findOne({ _id: id });
+    return await this.userRoleModel.findOne({ _id: id }).populate('roles');
+  }
+
+  async findUserRole(id: string): Promise<UserRoleType[]> {
+    const userId = Number(id);
+    return await this.userRoleModel.find({ userId }).populate('roles');
   }
 
   async create(createRoleDto: CreateUserRoleDto): Promise<UserRoleType> {
