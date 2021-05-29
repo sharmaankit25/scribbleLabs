@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
 import { CatsService } from './cats.service'
 import { CatDTO } from './dto/create-cat.dto'
-import { Cat } from './schemas/Cat.schema'
+import { Cat } from './schemas/cat.schema'
 
 @Controller('cats')
 export class CatsController {
@@ -14,6 +14,7 @@ export class CatsController {
 
   @Get(':id')
   findOne(@Param('id') id): Promise<Cat> {
+    console.log('Get One')
     return this.catsService.findOne(id)
   }
 

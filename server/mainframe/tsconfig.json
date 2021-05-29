@@ -1,5 +1,5 @@
 {
-  // "extends": "../../tsconfig.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "module": "commonjs",
     "declaration": true,
@@ -12,7 +12,11 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "@core/common": ["../../common"],
+      "@server/shared": ["../shared"]
+    }
   },
   "strictPropertyInitialization": false,
   "exclude": ["node_modules", "dist"]

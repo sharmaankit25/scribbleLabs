@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Document } from 'mongoose'
-import { PermissionsEnum } from '../../../../../common/Permissions'
+// import { PermissionsEnum } from '../../'
 export type UserPermissionDocument = UserPermission & Document
 
 @Schema({
@@ -10,7 +10,7 @@ export class UserPermission extends Document {
   @Prop(Number)
   userId: number
 
-  @Prop(PermissionsEnum)
+  @Prop([String])
   permissions: string[]
 }
 

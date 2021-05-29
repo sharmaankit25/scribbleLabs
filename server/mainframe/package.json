@@ -30,6 +30,7 @@
     "@nestjs/mongoose": "^7.2.4",
     "@nestjs/passport": "^7.1.5",
     "@nestjs/platform-express": "^7.6.17",
+    "@nestjs/swagger": "^4.8.0",
     "@nestjs/typeorm": "^7.1.5",
     "apollo-server-express": "^2.22.2",
     "bcryptjs": "^2.4.3",
@@ -46,6 +47,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.6",
+    "swagger-ui-express": "^4.1.6",
     "type-graphql": "^1.1.1",
     "typeorm": "^0.2.32"
   },
@@ -63,7 +65,6 @@
     "@typescript-eslint/parser": "^4.19.0",
     "eslint": "^7.22.0",
     "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-import": "^2.23.3",
     "eslint-plugin-prettier": "^3.3.1",
     "jest": "^26.6.3",
     "prettier": "^2.2.1",

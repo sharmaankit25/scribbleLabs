@@ -6,13 +6,13 @@ export type CatDocument = Cat & Document
   timestamps: true,
 })
 export class Cat extends Document {
-  @Prop(String)
+  @Prop({ type: String })
   name: string
 
-  @Prop(Number)
+  @Prop({ type: Number })
   age: number
 
-  @Prop(String)
+  @Prop({ type: String })
   breed: string
 }
 

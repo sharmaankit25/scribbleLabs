@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common'
 import { CatsResolver } from './cats.resolver'
 import { MongooseModule } from '@nestjs/mongoose'
-import { Cat, CatSchema } from './schemas/Cat.schema'
+import { Cat, CatSchema } from './schemas/cat.schema'
 import { CatsService } from './cats.service'
 import { CatsController } from './cats.controller'
 
