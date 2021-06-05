@@ -7,14 +7,17 @@ export type RoleDocument = Role & Document
   timestamps: true,
 })
 export class Role extends Document {
-  @Prop({ type: String })
+  @Prop(String)
   title: string
 
-  @Prop({ type: String })
+  @Prop(String)
   slug: string
 
   @Prop({ type: String })
   description: string
+
+  @Prop([String])
+  permissions: string[]
 }
 
 export const RoleSchema = SchemaFactory.createForClass(Role)

@@ -1,45 +1,63 @@
-import { Injectable, UnauthorizedException, Logger, Res } from '@nestjs/common';
+import { Injectable, UnauthorizedException, Logger, Res } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
-import { UserRepository } from './user.repository';
-import { InjectRepository } from '@nestjs/typeorm';
-import { AuthCredentialsDto } from './dto/auth-credentials.dto';
-import { JwtPayload } from './jwt-payload.interface';
+import { UserRepository } from './user.repository'
+import { InjectRepository } from '@nestjs/typeorm'
+import { AuthCredentialsDto } from './dto/auth-credentials.dto'
+import { JwtPayload } from './jwt-payload.interface'
 import * as config from 'config'
+import { UserRolesService } from 'src/roles-and-permissions/services/userRoles.service'
 
 @Injectable()
 export class AuthService {
-    private logger = new Logger('AuthService')
+  private logger = new Logger('AuthService')
 
-    constructor(
-        @InjectRepository(UserRepository)
-        private userRepository: UserRepository,
-        private jwtService: JwtService
-    ) {}
+  constructor(
+    @InjectRepository(UserRepository)
+    private userRepository: UserRepository,
+    private jwtService: JwtService,
+    private userRolesService: UserRolesService
+  ) {}
 
-    async signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
-        return this.userRepository.signUp(authCredentialsDto)
+  async signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
+    return this.userRepository.signUp(authCredentialsDto)
+  }
+
+  async signIn(
+    authCredentialsDto: AuthCredentialsDto
+  ): Promise<{ accessToken: string }> {
+    const username = await this.userRepository.validateUserPassword(
+      authCredentialsDto
+    )
+
+    if (!username) {
+      throw new UnauthorizedException('Invalid Credentials')
     }
 
-    async signIn(authCredentialsDto: AuthCredentialsDto): Promise<{ accessToken: string}> {
-        const username = await this.userRepository.validateUserPassword(authCredentialsDto)
+    const payload: JwtPayload = { username }
+    const accessToken = await this.jwtService.sign(payload)
+    this.logger.debug(
+      `Generated JWT Token with payload ${JSON.stringify(payload)}`
+    )
 
-        if(!username) {
-            throw new UnauthorizedException('Invalid Credentials')
-        }
+    return { accessToken }
+  }
 
-        const payload: JwtPayload = { username }
-        const accessToken = await this.jwtService.sign(payload)
-        this.logger.debug(`Generated JWT Token with payload ${JSON.stringify(payload)}`)
+  public getCookieWithJwtToken(token: string) {
+    const jwtConfig = config.get('jwt')
+    return `Authentication=${token}; HttpOnly; Path=/; Max-Age=${
+      jwtConfig.expiresIn || 10000
+    }`
+  }
 
-        return { accessToken }
-    }
+  public getCookieForLogOut() {
+    return `Authentication=; HttpOnly; Path=/; Max-Age=0`
+  }
 
-    public getCookieWithJwtToken(token: string) {
-        const jwtConfig = config.get('jwt')
-        return `Authentication=${token}; HttpOnly; Path=/; Max-Age=${jwtConfig.expiresIn || 10000}`;
-    }
+  public getAuthUserRoles(userId: number) {
+    return this.userRolesService.findUserRole(userId)
+  }
 
-    public getCookieForLogOut() {
-        return `Authentication=; HttpOnly; Path=/; Max-Age=0`;
-    }
+  public getAuthUserPermissions(userId: number) {
+    return this.userRolesService.findUserPermission(userId)
+  }
 }

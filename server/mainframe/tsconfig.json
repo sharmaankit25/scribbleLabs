@@ -16,7 +16,8 @@
     "paths": {
       "@core/common": ["../../common"],
       "@server/shared": ["../shared"]
-    }
+    },
+    "lib": ["ES2019"]
   },
   "strictPropertyInitialization": false,
   "exclude": ["node_modules", "dist"]
