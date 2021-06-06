@@ -35,7 +35,6 @@ export class RolesService {
     id: string,
     permissions: CreateRolePermissionDto
   ): Promise<RoleType> {
-    console.log(permissions)
     return await this.roleModel.findByIdAndUpdate(id, permissions)
   }
 }

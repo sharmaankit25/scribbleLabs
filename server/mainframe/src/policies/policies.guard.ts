@@ -1,35 +1,39 @@
-import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
-import { Reflector } from "@nestjs/core";
-import { AppAbility, CaslAbilityFactory } from "src/casl/casl-ability.factory";
-import { CHECK_POLICIES_KEY } from "./check-policies.decorator";
-import { PolicyHandler } from "./policies.interface";
+import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common'
+import { Reflector } from '@nestjs/core'
+import { AuthService } from 'src/auth/auth.service'
+import { AppAbility, CaslAbilityFactory } from 'src/casl/casl-ability.factory'
+import { CHECK_POLICIES_KEY } from './check-policies.decorator'
+import { PolicyHandler } from './policies.interface'
 
 @Injectable()
 export class PoliciesGuard implements CanActivate {
   constructor(
     private reflector: Reflector,
     private caslAbilityFactory: CaslAbilityFactory,
+    private authService: AuthService
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const policyHandlers =
       this.reflector.get<PolicyHandler[]>(
         CHECK_POLICIES_KEY,
-        context.getHandler(),
-      ) || [];
+        context.getHandler()
+      ) || []
 
-    const { user } = context.switchToHttp().getRequest();
-    const ability = this.caslAbilityFactory.createForUser(user);
+    const { user } = context.switchToHttp().getRequest()
+    const permissions = await this.authService.getAuthUserPermissions(user.id)
 
-    return policyHandlers.every((handler) =>
-      this.execPolicyHandler(handler, ability),
-    );
+    const ability = this.caslAbilityFactory.createForUser(user, permissions)
+
+    return policyHandlers.every(handler =>
+      this.execPolicyHandler(handler, ability)
+    )
   }
 
   private execPolicyHandler(handler: PolicyHandler, ability: AppAbility) {
     if (typeof handler === 'function') {
-      return handler(ability);
+      return handler(ability)
     }
-    return handler.handle(ability);
+    return handler.handle(ability)
   }
 }
