@@ -22,10 +22,10 @@ import { TasksService } from './tasks.service'
 import { AuthGuard } from '@nestjs/passport'
 import { User } from 'src/auth/user.entity'
 import { GetUser } from 'src/auth/get-user.decorator'
-import { PoliciesGuard } from 'src/policies/policies.guard'
 import { AppAbility } from 'src/casl/casl-ability.factory'
 import { Action } from 'src/casl/actions.enum'
-import { CheckPolicies } from 'src/policies/check-policies.decorator'
+import { CheckPolicies } from 'src/casl/check-policies.decorator'
+import { PoliciesGuard } from 'src/casl/policies.guard'
 
 @Controller('tasks')
 @UseGuards(AuthGuard(), PoliciesGuard)

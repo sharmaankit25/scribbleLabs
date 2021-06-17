@@ -1,6 +1,1 @@
-import { PERMISSIONS, PermissionsEnum } from './Permissions'
-
-export default {
-    PERMISSIONS,
-    PermissionsEnum
-}
+export { PERMISSIONS, PermissionsEnum } from './Permissions'

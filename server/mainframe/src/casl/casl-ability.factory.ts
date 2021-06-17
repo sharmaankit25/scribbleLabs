@@ -6,11 +6,11 @@ import {
   InferSubjects,
 } from '@casl/ability'
 import { Injectable } from '@nestjs/common'
-import { AuthService } from 'src/auth/auth.service'
 import { User } from 'src/auth/user.entity'
 import { TaskStatus } from 'src/tasks/task-status.enum'
 import { Task } from 'src/tasks/task.entity'
 import { Action } from './actions.enum'
+import { PERMISSIONS, PermissionsEnum } from '@core/common'
 
 type Subjects = InferSubjects<typeof Task | typeof User> | 'all'
 
@@ -23,23 +23,30 @@ export class CaslAbilityFactory {
       Ability<[Action, Subjects]>
     >(Ability as AbilityClass<AppAbility>)
 
-    if (permissions.includes('TASK_MANAGE')) {
+    // Object.entries(PERMISSIONS).forEach(([entity, permission]) => {
+    //   if (permissions.includes(permission.manage)) {
+    //     Subjects<entity>
+    //     can(Action.Manage, )
+    //   }
+    // })
+
+    if (permissions.includes(PermissionsEnum.TASK_MANAGE)) {
       can(Action.Manage, Task)
     }
 
-    if (permissions.includes('TASK_CREATE')) {
+    if (permissions.includes(PERMISSIONS.Task.create)) {
       can(Action.Create, Task)
     }
 
-    if (permissions.includes('TASK_READ')) {
+    if (permissions.includes(PERMISSIONS.Task.read)) {
       can(Action.Read, Task)
     }
 
-    if (permissions.includes('TASK_UPDATE')) {
+    if (permissions.includes(PermissionsEnum.TASK_UPDATE)) {
       can(Action.Update, Task, { userId: user.id })
     }
 
-    if (permissions.includes('TASK_DELETE')) {
+    if (permissions.includes(PERMISSIONS.Task.delete)) {
       can(Action.Delete, Task, { userId: user.id, status: TaskStatus.DONE })
     }
 
